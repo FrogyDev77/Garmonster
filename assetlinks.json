@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.frogydev77.twa",
+        "sha256_cert_fingerprints": ["BB:6C:9A:CE:EB:5A:E5:69:33:B9:30:71:45:A8:84:26:D6:CF:F8:70:CF:20:CF:46:64:C0:8B:5B:D0:EA:60:05"]
+      }
+    }]
