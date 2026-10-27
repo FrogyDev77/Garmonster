@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#FFE4EC">
+<meta name="color-scheme" content="light">
+<title>Monster Garden</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <!-- Barra superior: monedas, tienda y arcade -->
+  <header id="topbar">
+    <div class="coin-pill" id="coinPill"><span class="ico" data-icon="coin"></span><span id="coinCount">000</span></div>
+    <div class="top-actions">
+      <button id="btnInv" class="topbtn inv" aria-label="Abrir el inventario"><span class="ico" data-icon="chest"></span></button>
+      <button id="btnShop" class="topbtn shop" aria-label="Abrir la tienda"><span class="ico" data-icon="shop"></span></button>
+      <button id="btnArcade" class="topbtn arcade" aria-label="Abrir el arcade"><span class="ico" data-icon="rocket"></span></button>
+    </div>
+  </header>
+
+  <!-- Ventana principal (habitaciones, tienda, arcade y minijuegos) -->
+  <main id="stage">
+    <section id="mainWin" class="win">
+      <div class="win-title"><span id="winTitle">Sala.exe</span><span class="title-btns"><button class="win-tb" id="winEdit" aria-label="Mover decoración"><span class="ico" data-icon="pencil"></span></button><button class="win-x" id="winClose" aria-label="Cerrar ventana"><span class="ico" data-icon="close"></span></button></span></div>
+      <div class="win-body" id="winBody">
+        <div id="sceneWrap" class="scene-wrap">
+          <canvas id="scene" width="96" height="104"></canvas>
+          <div id="hint" class="hint"></div>
+          <div id="sceneChip" class="chip" hidden></div>
+        </div>
+        <div id="minimized" class="minimized" hidden>
+          <p>La ventana está minimizada.</p>
+          <button class="btn" id="btnRestore">Abrir Sala.exe</button>
+        </div>
+        <div id="shopView" class="shop-view" hidden>
+          <p class="inv-empty" id="invEmpty" hidden></p>
+          <div class="shop-grid" id="shopGrid"></div>
+          <div class="pager">
+            <button class="pager-arrow" id="pgPrev" aria-label="Página anterior"><span class="ico" data-icon="arrowL"></span></button>
+            <div class="dots" id="pgDots"></div>
+            <button class="pager-arrow" id="pgNext" aria-label="Página siguiente"><span class="ico" data-icon="arrowR"></span></button>
+          </div>
+        </div>
+        <div id="gameView" class="game-view" hidden>
+          <div class="game-hud" id="gameHud"></div>
+          <div class="game-canvas-wrap"><canvas id="gameCanvas"></canvas>
+            <div class="game-result" id="gameResult" hidden></div>
+          </div>
+          <div class="game-controls" id="gameControls"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Navegación inferior de habitaciones -->
+  <nav id="nav" class="nav">
+    <button class="navbtn" data-room="sala" aria-label="Sala"><span class="ico" data-icon="house"></span></button>
+    <button class="navbtn" data-room="cocina" aria-label="Cocina"><span class="ico" data-icon="cup"></span></button>
+    <button class="navbtn" data-room="bano" aria-label="Baño"><span class="ico" data-icon="drop"></span></button>
+    <button class="navbtn" data-room="dormitorio" aria-label="Dormitorio"><span class="ico" data-icon="moon"></span></button>
+  </nav>
+  <!-- Categorías de la tienda -->
+  <nav id="shopTabs" class="nav" hidden></nav>
+  <!-- Navegación del arcade -->
+  <nav id="arcadeNav" class="nav arcade-nav" hidden>
+    <button class="navbtn" id="btnArcBack" aria-label="Volver atrás"><span class="ico" data-icon="arrowBack"></span></button>
+    <button class="navbtn" id="btnArcHome" aria-label="Volver a la sala"><span class="ico" data-icon="arrowBack"></span><span class="ico" data-icon="house"></span></button>
+  </nav>
+
+  <!-- Estado rápido de la mascota -->
+  <button id="statusBar" class="status" aria-label="Ver el estado de la mascota"></button>
+
+  <!-- Capa de ventanas modales -->
+  <div id="overlay" class="overlay" hidden><div id="modal" class="win modal"></div></div>
+
+  <!-- Inicio: huevo y nombre -->
+  <div id="intro" class="intro" hidden>
+    <button id="eggLabel" class="egg-label">Presiona el huevo</button>
+    <canvas id="introCanvas" width="96" height="140"></canvas>
+    <div id="namePanel" class="name-panel" hidden>
+      <label for="nameInput">¿Cómo se va a llamar?</label>
+      <div class="name-row">
+        <input id="nameInput" maxlength="12" autocomplete="off" spellcheck="false" placeholder="Nombre">
+        <button id="btnDice" class="dice" aria-label="Nombre al azar"><span class="ico" data-icon="dice"></span></button>
+      </div>
+      <p class="name-error" id="nameError"></p>
+      <button id="btnName" class="btn go">Continuar</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</div>
+
+<!-- Módulos del juego (orden importante: cada uno usa los anteriores) -->
+<script src="js/palette.js"></script>
+<script src="js/pixel.js"></script>
+<script src="js/data.js"></script>
+<script src="js/sprites.js"></script>
+<script src="js/pet.js"></script>
+<script src="js/state.js"></script>
+<script src="js/needs.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/rooms.js"></script>
+<script src="js/games/space.js"></script>
+<script src="js/games/tetris.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/intro.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
